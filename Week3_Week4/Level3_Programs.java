@@ -1,60 +1,34 @@
-// Program to find frequency of each digit in a number using array
-
 import java.util.Scanner;
 
-class Level3_Programs {
+public class Level3_Programs {
 
     public static void main(String[] args) {
 
-        // Scanner object
         Scanner input = new Scanner(System.in);
 
-        // Input number
-        System.out.print("Enter a number: ");
-        int number = input.nextInt();
+        System.out.print("Enter year: ");
+        int year = input.nextInt();
 
-        // Validate input
-        if (number <= 0) {
-            System.err.println("Invalid number.");
-            input.close();
-            return;
+        // Multiple if
+        if (year >= 1582) {
+            if (year % 4 == 0) {
+                if (year % 100 == 0) {
+                    if (year % 400 == 0)
+                        System.out.println("Leap Year");
+                    else
+                        System.out.println("Not Leap Year");
+                } else
+                    System.out.println("Leap Year");
+            } else
+                System.out.println("Not Leap Year");
         }
 
-        // Step 1: Count digits
-        int temp = number;
-        int count = 0;
+        // Single if
+        if (year >= 1582 &&
+            (year % 4 == 0 &&
+            (year % 100 != 0 || year % 400 == 0))) {
 
-        while (temp > 0) {
-            count++;
-            temp /= 10;
-        }
-
-        // Step 2: Store digits in array
-        int[] digits = new int[count];
-        int index = 0;
-
-        while (number > 0) {
-            digits[index] = number % 10;
-            number /= 10;
-            index++;
-        }
-
-        // Step 3: Frequency array (0–9 digits)
-        int[] frequency = new int[10];
-
-        // Step 4: Count frequency
-        for (int i = 0; i < digits.length; i++) {
-            int digit = digits[i];
-            frequency[digit]++;
-        }
-
-        // Step 5: Display result
-        System.out.println("\nDigit Frequency:");
-
-        for (int i = 0; i < frequency.length; i++) {
-            if (frequency[i] > 0) {
-                System.out.println("Digit " + i + " → " + frequency[i] + " times");
-            }
+            System.out.println("Leap Year (Single If)");
         }
 
         input.close();
